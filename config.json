@@ -1,0 +1,25 @@
+{
+  "host": "0.0.0.0",
+  "port": 5300,
+  "ollama_url": "http://127.0.0.1:11434",
+  "default_model": "qwen2.5:3b",
+  "models": ["qwen2.5:3b", "llama3.2:3b"],
+  "system_prompt": "Ты — приватный ассистент, который работает на домашнем сервере. Отвечай по-русски, по делу и кратко, если не просят подробно. Если не знаешь ответа — так и скажи.",
+  "generation": {
+    "num_ctx": 3072,
+    "temperature": 0.3,
+    "max_tokens": 512
+  },
+  "limits": {
+    "max_context_tokens": 3072,
+    "max_output_tokens": 512,
+    "max_message_chars": 8000,
+    "max_body_bytes": 65536,
+    "default_rpm": 10,
+    "default_concurrency": 2,
+    "gpu_slots": 1,
+    "queue_size": 6,
+    "queue_timeout_s": 120,
+    "auth_fail_per_min": 20
+  }
+}

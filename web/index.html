@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private LLM</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="login" class="login" hidden>
+  <form id="login-form" class="login__box">
+    <div class="brand">private<b>llm</b><span>://</span></div>
+    <p class="muted">Локальная модель на домашнем сервере. Введите API-ключ — его выдаёт владелец сервиса
+      (<code>python app/keys.py add имя</code>).</p>
+    <input id="key-input" type="password" placeholder="lsk_…" autocomplete="off" spellcheck="false">
+    <button class="btn btn--primary" type="submit">Войти</button>
+    <div id="login-error" class="error"></div>
+  </form>
+</div>
+
+<div id="app" class="app" hidden>
+  <aside class="side">
+    <div class="brand">private<b>llm</b><span>://</span></div>
+    <button id="new-chat" class="btn btn--primary">+ новый чат</button>
+    <div id="chat-list" class="chat-list"></div>
+    <div class="side__foot">
+      <div id="me" class="muted small"></div>
+      <button id="admin-btn" class="btn btn--ghost" hidden>сервис</button>
+      <button id="logout" class="btn btn--ghost">выйти</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="bar">
+      <select id="model"></select>
+      <label class="small">t <input id="temp" type="number" min="0" max="1.5" step="0.1" value="0.3"></label>
+      <label class="small">max <input id="maxtok" type="number" min="1" step="32" value="512"></label>
+      <span class="spacer"></span>
+      <span id="limits" class="muted small"></span>
+      <span id="health" class="dot" title="состояние сервиса"></span>
+    </header>
+
+    <section id="chat-view" class="chat">
+      <div id="messages" class="messages"><div class="empty">Начните диалог — модель работает на этом сервере, данные никуда не уходят.</div></div>
+      <form id="composer" class="composer">
+        <textarea id="input" rows="2" placeholder="Сообщение… (Enter — отправить, Shift+Enter — новая строка)"></textarea>
+        <div class="composer__side">
+          <span id="counter" class="muted small"></span>
+          <button id="send" class="btn btn--primary" type="submit">отправить</button>
+          <button id="stop" class="btn btn--danger" type="button" hidden>стоп</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="admin-view" class="admin" hidden>
+      <div class="admin__head"><h2>Сервис</h2><button id="admin-close" class="btn btn--ghost">← к чату</button></div>
+      <div id="admin-cards" class="cards"></div>
+      <div class="grid2">
+        <div class="panel"><div class="panel__title">Ключи</div><div id="admin-keys"></div></div>
+        <div class="panel"><div class="panel__title">Ответы за час по статусам</div><div id="admin-status"></div></div>
+      </div>
+      <div class="panel"><div class="panel__title">Клиенты за час</div><div id="admin-clients"></div></div>
+      <div class="panel"><div class="panel__title">Последние запросы (без текста сообщений)</div><div id="admin-recent"></div></div>
+    </section>
+  </main>
+</div>
+<script src="/md.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
